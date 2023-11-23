@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopifyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="spf_AdminStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopId" Type="int" />
+    <Property Name="PaymentStatus" Type="int" />
+    <Property Name="ShopStatus" Type="int" />
+  </EntityType>
+  <EntityType Name="spf_CImages">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageName" Type="varchar" MaxLength="100" />
+    <Property Name="DisplayOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="spf_ContactUs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="12" />
+    <Property Name="Subject" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="spf_Otp">
+    <Key>
+      <PropertyRef Name="OId" />
+    </Key>
+    <Property Name="OId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Otp" Type="varchar" MaxLength="6" />
+    <Property Name="OtpRole" Type="int" />
+  </EntityType>
+  <EntityType Name="spf_Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopId" Type="int" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="spf_Shops">
+    <Key>
+      <PropertyRef Name="ShopId" />
+    </Key>
+    <Property Name="ShopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="12" />
+    <Property Name="Landline" Type="nvarchar" MaxLength="12" />
+    <Property Name="ShopImage" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Latitude" Type="nvarchar" MaxLength="250" />
+    <Property Name="Longitude" Type="nvarchar" MaxLength="250" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="Priority" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="UserRole" Type="int" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="OpenHours" Type="nvarchar(max)" />
+    <Property Name="Holiday" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="spf_User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Latitude" Type="nvarchar" MaxLength="250" />
+    <Property Name="Longitude" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserRole" Type="int" />
+    <Property Name="parentId" Type="int" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="spf_UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleId" />
+    </Key>
+    <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserRole" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="spf_VistCount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopId" Type="int" />
+    <Property Name="Visit" Type="int" />
+  </EntityType>
+  <Association Name="FK__spf_Admin__ShopI__5CD6CB2B">
+    <End Role="spf_Shops" Type="Self.spf_Shops" Multiplicity="0..1" />
+    <End Role="spf_AdminStatus" Type="Self.spf_AdminStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="spf_Shops">
+        <PropertyRef Name="ShopId" />
+      </Principal>
+      <Dependent Role="spf_AdminStatus">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spf_Produ__ShopI__49C3F6B7">
+    <End Role="spf_Shops" Type="Self.spf_Shops" Multiplicity="0..1" />
+    <End Role="spf_Product" Type="Self.spf_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="spf_Shops">
+        <PropertyRef Name="ShopId" />
+      </Principal>
+      <Dependent Role="spf_Product">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spf_Shops__UserR__34C8D9D1">
+    <End Role="spf_UserRole" Type="Self.spf_UserRole" Multiplicity="0..1" />
+    <End Role="spf_Shops" Type="Self.spf_Shops" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="spf_UserRole">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="spf_Shops">
+        <PropertyRef Name="UserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spf_User__UserRo__286302EC">
+    <End Role="spf_UserRole" Type="Self.spf_UserRole" Multiplicity="0..1" />
+    <End Role="spf_User" Type="Self.spf_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="spf_UserRole">
+        <PropertyRef Name="UserRoleId" />
+      </Principal>
+      <Dependent Role="spf_User">
+        <PropertyRef Name="UserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spf_VistC__ShopI__5FB337D6">
+    <End Role="spf_Shops" Type="Self.spf_Shops" Multiplicity="0..1" />
+    <End Role="spf_VistCount" Type="Self.spf_VistCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="spf_Shops">
+        <PropertyRef Name="ShopId" />
+      </Principal>
+      <Dependent Role="spf_VistCount">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="S_GetSearchShops" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productName" Type="varchar" Mode="In" />
+    <Parameter Name="kiloMeter" Type="int" Mode="In" />
+    <Parameter Name="Latitude" Type="float" Mode="In" />
+    <Parameter Name="Longitude" Type="float" Mode="In" />
+  </Function>
+  <EntityContainer Name="ShopifyModelStoreContainer">
+    <EntitySet Name="spf_AdminStatus" EntityType="Self.spf_AdminStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_CImages" EntityType="Self.spf_CImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_ContactUs" EntityType="Self.spf_ContactUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_Otp" EntityType="Self.spf_Otp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_Product" EntityType="Self.spf_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_Shops" EntityType="Self.spf_Shops" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_User" EntityType="Self.spf_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_UserRole" EntityType="Self.spf_UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spf_VistCount" EntityType="Self.spf_VistCount" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__spf_Admin__ShopI__5CD6CB2B" Association="Self.FK__spf_Admin__ShopI__5CD6CB2B">
+      <End Role="spf_Shops" EntitySet="spf_Shops" />
+      <End Role="spf_AdminStatus" EntitySet="spf_AdminStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spf_Produ__ShopI__49C3F6B7" Association="Self.FK__spf_Produ__ShopI__49C3F6B7">
+      <End Role="spf_Shops" EntitySet="spf_Shops" />
+      <End Role="spf_Product" EntitySet="spf_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spf_Shops__UserR__34C8D9D1" Association="Self.FK__spf_Shops__UserR__34C8D9D1">
+      <End Role="spf_UserRole" EntitySet="spf_UserRole" />
+      <End Role="spf_Shops" EntitySet="spf_Shops" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spf_User__UserRo__286302EC" Association="Self.FK__spf_User__UserRo__286302EC">
+      <End Role="spf_UserRole" EntitySet="spf_UserRole" />
+      <End Role="spf_User" EntitySet="spf_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spf_VistC__ShopI__5FB337D6" Association="Self.FK__spf_VistC__ShopI__5FB337D6">
+      <End Role="spf_Shops" EntitySet="spf_Shops" />
+      <End Role="spf_VistCount" EntitySet="spf_VistCount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DailyFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ItemMalName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ItemImage" Type="varchar" MaxLength="100" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="ItemPrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="varchar" MaxLength="100" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Unit" Type="int" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Mobile" Type="varchar" MaxLength="13" />
+          <Property Name="HouseName" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="LandMark" Type="varchar" MaxLength="100" />
+          <Property Name="Town" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="PinCode" Type="varchar" MaxLength="10" />
+          <Property Name="TotalItems" Type="int" />
+          <Property Name="TotalAmount" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="SpecialOfferId" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Unit" Type="int" />
+          <Property Name="Quantity" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="SpecialOffer">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Unit" Type="int" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ItemMalName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ItemImage" Type="varchar" MaxLength="100" />
+          <Property Name="Quantity" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SpecialOfferItems">
+          <Key>
+            <PropertyRef Name="SItemID" />
+          </Key>
+          <Property Name="SItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfferID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UnitItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="unit" Type="int" />
+          <Property Name="prize" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <Association Name="FK__ItemPrice__ItemI__4F7CD00D">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemPrice" Type="Self.ItemPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ItemPrice">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__ItemI__6E01572D">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__6FE99F9F">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Speci__6EF57B66">
+          <End Role="SpecialOffer" Type="Self.SpecialOffer" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialOffer">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SpecialOfferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpecialOf__ItemI__59FA5E80">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SpecialOfferItems" Type="Self.SpecialOfferItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="SpecialOfferItems">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpecialOf__Offer__5812160E">
+          <End Role="SpecialOffer" Type="Self.SpecialOffer" Multiplicity="1" />
+          <End Role="SpecialOfferItems" Type="Self.SpecialOfferItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialOffer">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="SpecialOfferItems">
+              <PropertyRef Name="OfferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DailyFishModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemPrice" EntityType="Self.ItemPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialOffer" EntityType="Self.SpecialOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialOfferItems" EntityType="Self.SpecialOfferItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitItem" EntityType="Self.UnitItem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ItemPrice__ItemI__4F7CD00D" Association="Self.FK__ItemPrice__ItemI__4F7CD00D">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemPrice" EntitySet="ItemPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__ItemI__6E01572D" Association="Self.FK__OrderDeta__ItemI__6E01572D">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__6FE99F9F" Association="Self.FK__OrderDeta__Order__6FE99F9F">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Speci__6EF57B66" Association="Self.FK__OrderDeta__Speci__6EF57B66">
+            <End Role="SpecialOffer" EntitySet="SpecialOffer" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpecialOf__ItemI__59FA5E80" Association="Self.FK__SpecialOf__ItemI__59FA5E80">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SpecialOfferItems" EntitySet="SpecialOfferItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpecialOf__Offer__5812160E" Association="Self.FK__SpecialOf__Offer__5812160E">
+            <End Role="SpecialOffer" EntitySet="SpecialOffer" />
+            <End Role="SpecialOfferItems" EntitySet="SpecialOfferItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DailyFishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Item__CategoryId__25869641" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ItemMalName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ItemImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Item__CategoryId__25869641" FromRole="Item" ToRole="Category" />
+          <NavigationProperty Name="ItemPrices" Relationship="Self.FK__ItemPrice__ItemI__36B12243" FromRole="Item" ToRole="ItemPrice" />
+          <NavigationProperty Name="UnitItems" Relationship="Self.FK__UnitItem__UnitID__286302EC" FromRole="Item" ToRole="UnitItem" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="SpecialOfferItems" Relationship="DailyFishModel.FK__SpecialOf__ItemI__59FA5E80" FromRole="Item" ToRole="SpecialOfferItem" />
+          <NavigationProperty Name="OrderDetails" Relationship="DailyFishModel.FK__OrderDeta__ItemI__6E01572D" FromRole="Item" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="ItemPrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__ItemPrice__ItemI__36B12243" FromRole="ItemPrice" ToRole="Item" />
+          <Property Name="Unit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UnitItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="Int32" />
+          <Property Name="prize" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__UnitItem__UnitID__286302EC" FromRole="UnitItem" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK__Item__CategoryId__25869641">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemPrice__ItemI__36B12243">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemPrice" Type="Self.ItemPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ItemPrice">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitItem__UnitID__286302EC">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="UnitItem" Type="Self.UnitItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="UnitItem">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DailyFishEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="ItemPrices" EntityType="Self.ItemPrice" />
+          <EntitySet Name="UnitItems" EntityType="Self.UnitItem" />
+          <AssociationSet Name="FK__Item__CategoryId__25869641" Association="Self.FK__Item__CategoryId__25869641">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemPrice__ItemI__36B12243" Association="Self.FK__ItemPrice__ItemI__36B12243">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemPrice" EntitySet="ItemPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitItem__UnitID__286302EC" Association="Self.FK__UnitItem__UnitID__286302EC">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="UnitItem" EntitySet="UnitItems" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="DailyFishModel.Order" />
+          <EntitySet Name="SpecialOffers" EntityType="DailyFishModel.SpecialOffer" />
+          <EntitySet Name="SpecialOfferItems" EntityType="DailyFishModel.SpecialOfferItem" />
+          <AssociationSet Name="FK__SpecialOf__ItemI__59FA5E80" Association="DailyFishModel.FK__SpecialOf__ItemI__59FA5E80">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="SpecialOfferItem" EntitySet="SpecialOfferItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpecialOf__Offer__5812160E" Association="DailyFishModel.FK__SpecialOf__Offer__5812160E">
+            <End Role="SpecialOffer" EntitySet="SpecialOffers" />
+            <End Role="SpecialOfferItem" EntitySet="SpecialOfferItems" />
+          </AssociationSet>
+          <EntitySet Name="OrderDetails" EntityType="DailyFishModel.OrderDetail" />
+          <AssociationSet Name="FK__OrderDeta__ItemI__6E01572D" Association="DailyFishModel.FK__OrderDeta__ItemI__6E01572D">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__6FE99F9F" Association="DailyFishModel.FK__OrderDeta__Order__6FE99F9F">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Speci__6EF57B66" Association="DailyFishModel.FK__OrderDeta__Speci__6EF57B66">
+            <End Role="SpecialOffer" EntitySet="SpecialOffers" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="HouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LandMark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Town" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TotalItems" Type="Int32" />
+          <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="OrderDetails" Relationship="DailyFishModel.FK__OrderDeta__Order__6FE99F9F" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="SpecialOffer">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Unit" Type="Int32" />
+          <Property Name="ItemName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ItemMalName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ItemImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SpecialOfferItems" Relationship="DailyFishModel.FK__SpecialOf__Offer__5812160E" FromRole="SpecialOffer" ToRole="SpecialOfferItem" />
+          <NavigationProperty Name="OrderDetails" Relationship="DailyFishModel.FK__OrderDeta__Speci__6EF57B66" FromRole="SpecialOffer" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="SpecialOfferItem">
+          <Key>
+            <PropertyRef Name="SItemID" />
+          </Key>
+          <Property Name="SItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfferID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item" Relationship="DailyFishModel.FK__SpecialOf__ItemI__59FA5E80" FromRole="SpecialOfferItem" ToRole="Item" />
+          <NavigationProperty Name="SpecialOffer" Relationship="DailyFishModel.FK__SpecialOf__Offer__5812160E" FromRole="SpecialOfferItem" ToRole="SpecialOffer" />
+        </EntityType>
+        <Association Name="FK__SpecialOf__ItemI__59FA5E80">
+          <End Type="DailyFishModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="DailyFishModel.SpecialOfferItem" Role="SpecialOfferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="SpecialOfferItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpecialOf__Offer__5812160E">
+          <End Type="DailyFishModel.SpecialOffer" Role="SpecialOffer" Multiplicity="1" />
+          <End Type="DailyFishModel.SpecialOfferItem" Role="SpecialOfferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialOffer">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="SpecialOfferItem">
+              <PropertyRef Name="OfferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="SpecialOfferId" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Unit" Type="Int32" />
+          <Property Name="Quantity" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item" Relationship="DailyFishModel.FK__OrderDeta__ItemI__6E01572D" FromRole="OrderDetail" ToRole="Item" />
+          <NavigationProperty Name="Order" Relationship="DailyFishModel.FK__OrderDeta__Order__6FE99F9F" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="SpecialOffer" Relationship="DailyFishModel.FK__OrderDeta__Speci__6EF57B66" FromRole="OrderDetail" ToRole="SpecialOffer" />
+        </EntityType>
+        <Association Name="FK__OrderDeta__ItemI__6E01572D">
+          <End Type="DailyFishModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="DailyFishModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__6FE99F9F">
+          <End Type="DailyFishModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="DailyFishModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Speci__6EF57B66">
+          <End Type="DailyFishModel.SpecialOffer" Role="SpecialOffer" Multiplicity="0..1" />
+          <End Type="DailyFishModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialOffer">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SpecialOfferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DailyFishModelStoreContainer" CdmEntityContainer="DailyFishEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DailyFishModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="DailyFishModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemMalName" ColumnName="ItemMalName" />
+                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemPrices">
+            <EntityTypeMapping TypeName="DailyFishModel.ItemPrice">
+              <MappingFragment StoreEntitySet="ItemPrice">
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitItems">
+            <EntityTypeMapping TypeName="DailyFishModel.UnitItem">
+              <MappingFragment StoreEntitySet="UnitItem">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="prize" ColumnName="prize" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DailyFishModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="LandMark" ColumnName="LandMark" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialOffers">
+            <EntityTypeMapping TypeName="DailyFishModel.SpecialOffer">
+              <MappingFragment StoreEntitySet="SpecialOffer">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+                <ScalarProperty Name="ItemMalName" ColumnName="ItemMalName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialOfferItems">
+            <EntityTypeMapping TypeName="DailyFishModel.SpecialOfferItem">
+              <MappingFragment StoreEntitySet="SpecialOfferItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+                <ScalarProperty Name="SItemID" ColumnName="SItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="DailyFishModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SpecialOfferId" ColumnName="SpecialOfferId" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

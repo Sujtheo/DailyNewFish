@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a26e82a27d14820b1b0f4dbda9014db" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopifyModel.spf_User" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_UserRole" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="ShopifyModel.FK__spf_User__UserRo__3E52440B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_Shops" Width="1.5" PointX="3" PointY="6" />
+        <AssociationConnector Association="ShopifyModel.FK__spf_Shops__UserR__34C8D9D1" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_Otp" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_Product" Width="1.5" PointX="5.375" PointY="3.125" />
+        <AssociationConnector Association="ShopifyModel.FK__spf_Produ__ShopI__49C3F6B7" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_AdminStatus" Width="1.5" PointX="5.25" PointY="6.125" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_VistCount" Width="1.5" PointX="5.25" PointY="8.875" />
+        <AssociationConnector Association="ShopifyModel.FK__spf_Admin__ShopI__5CD6CB2B" />
+        <AssociationConnector Association="ShopifyModel.FK__spf_VistC__ShopI__5FB337D6" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_CImages" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ShopifyModel.spf_ContactUs" Width="1.5" PointX="7.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

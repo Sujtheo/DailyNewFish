@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopifyModelStoreContainer" CdmEntityContainer="ShopifyEntities">
+    <EntitySetMapping Name="spf_User">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_User">
+        <MappingFragment StoreEntitySet="spf_User">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="parentId" ColumnName="parentId" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_UserRole">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_UserRole">
+        <MappingFragment StoreEntitySet="spf_UserRole">
+          <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_Shops">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_Shops">
+        <MappingFragment StoreEntitySet="spf_Shops">
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+          <ScalarProperty Name="OpenHours" ColumnName="OpenHours" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ShopImage" ColumnName="ShopImage" />
+          <ScalarProperty Name="Landline" ColumnName="Landline" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_Otp">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_Otp">
+        <MappingFragment StoreEntitySet="spf_Otp">
+          <ScalarProperty Name="OtpRole" ColumnName="OtpRole" />
+          <ScalarProperty Name="Otp" ColumnName="Otp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OId" ColumnName="OId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_Product">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_Product">
+        <MappingFragment StoreEntitySet="spf_Product">
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_AdminStatus">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_AdminStatus">
+        <MappingFragment StoreEntitySet="spf_AdminStatus">
+          <ScalarProperty Name="ShopStatus" ColumnName="ShopStatus" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_VistCount">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_VistCount">
+        <MappingFragment StoreEntitySet="spf_VistCount">
+          <ScalarProperty Name="Visit" ColumnName="Visit" />
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_CImages">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_CImages">
+        <MappingFragment StoreEntitySet="spf_CImages">
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spf_ContactUs">
+      <EntityTypeMapping TypeName="ShopifyModel.spf_ContactUs">
+        <MappingFragment StoreEntitySet="spf_ContactUs">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="S_GetSearchShops" FunctionName="ShopifyModel.Store.S_GetSearchShops">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ShopifyModel.S_GetSearchShops_Result">
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+          <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Landline" ColumnName="Landline" />
+          <ScalarProperty Name="ShopImage" ColumnName="ShopImage" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="OpenHours" ColumnName="OpenHours" />
+          <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DailyFishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="150" />
+    <Property Name="ItemMalName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ItemImage" Type="varchar" MaxLength="100" />
+    <Property Name="IsAvailable" Type="bit" />
+  </EntityType>
+  <EntityType Name="ItemPrice">
+    <Key>
+      <PropertyRef Name="PriceID" />
+    </Key>
+    <Property Name="PriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="varchar" MaxLength="100" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Unit" Type="int" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Mobile" Type="varchar" MaxLength="13" />
+    <Property Name="HouseName" Type="varchar" MaxLength="100" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="LandMark" Type="varchar" MaxLength="100" />
+    <Property Name="Town" Type="varchar" MaxLength="100" />
+    <Property Name="City" Type="varchar" MaxLength="100" />
+    <Property Name="PinCode" Type="varchar" MaxLength="10" />
+    <Property Name="TotalItems" Type="int" />
+    <Property Name="TotalAmount" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="SpecialOfferId" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Unit" Type="int" />
+  </EntityType>
+  <EntityType Name="SpecialOffer">
+    <Key>
+      <PropertyRef Name="OfferID" />
+    </Key>
+    <Property Name="OfferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Unit" Type="int" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="150" />
+    <Property Name="ItemMalName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ItemImage" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SpecialOfferItems">
+    <Key>
+      <PropertyRef Name="SItemID" />
+    </Key>
+    <Property Name="SItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OfferID" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="float" />
+  </EntityType>
+  <EntityType Name="UnitItem">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="unit" Type="int" />
+    <Property Name="prize" Type="int" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <Association Name="FK__ItemPrice__ItemI__4F7CD00D">
+    <End Role="Item" Type="Self.Item" Multiplicity="1" />
+    <End Role="ItemPrice" Type="Self.ItemPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="ItemPrice">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__ItemI__5EBF139D">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Speci__5FB337D6">
+    <End Role="SpecialOffer" Type="Self.SpecialOffer" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpecialOffer">
+        <PropertyRef Name="OfferID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="SpecialOfferId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Speci__60A75C0F">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="SpecialOfferId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpecialOf__ItemI__59FA5E80">
+    <End Role="Item" Type="Self.Item" Multiplicity="1" />
+    <End Role="SpecialOfferItems" Type="Self.SpecialOfferItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="SpecialOfferItems">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpecialOf__Offer__5812160E">
+    <End Role="SpecialOffer" Type="Self.SpecialOffer" Multiplicity="1" />
+    <End Role="SpecialOfferItems" Type="Self.SpecialOfferItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpecialOffer">
+        <PropertyRef Name="OfferID" />
+      </Principal>
+      <Dependent Role="SpecialOfferItems">
+        <PropertyRef Name="OfferID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DailyFishModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemPrice" EntityType="Self.ItemPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpecialOffer" EntityType="Self.SpecialOffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpecialOfferItems" EntityType="Self.SpecialOfferItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitItem" EntityType="Self.UnitItem" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ItemPrice__ItemI__4F7CD00D" Association="Self.FK__ItemPrice__ItemI__4F7CD00D">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="ItemPrice" EntitySet="ItemPrice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__ItemI__5EBF139D" Association="Self.FK__OrderDeta__ItemI__5EBF139D">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Speci__5FB337D6" Association="Self.FK__OrderDeta__Speci__5FB337D6">
+      <End Role="SpecialOffer" EntitySet="SpecialOffer" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Speci__60A75C0F" Association="Self.FK__OrderDeta__Speci__60A75C0F">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpecialOf__ItemI__59FA5E80" Association="Self.FK__SpecialOf__ItemI__59FA5E80">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="SpecialOfferItems" EntitySet="SpecialOfferItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpecialOf__Offer__5812160E" Association="Self.FK__SpecialOf__Offer__5812160E">
+      <End Role="SpecialOffer" EntitySet="SpecialOffer" />
+      <End Role="SpecialOfferItems" EntitySet="SpecialOfferItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

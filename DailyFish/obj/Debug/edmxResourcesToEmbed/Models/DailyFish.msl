@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DailyFishModelStoreContainer" CdmEntityContainer="DailyFishEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="DailyFishModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="DailyFishModel.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemMalName" ColumnName="ItemMalName" />
+          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemPrices">
+      <EntityTypeMapping TypeName="DailyFishModel.ItemPrice">
+        <MappingFragment StoreEntitySet="ItemPrice">
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitItems">
+      <EntityTypeMapping TypeName="DailyFishModel.UnitItem">
+        <MappingFragment StoreEntitySet="UnitItem">
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="prize" ColumnName="prize" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpecialOffers">
+      <EntityTypeMapping TypeName="DailyFishModel.SpecialOffer">
+        <MappingFragment StoreEntitySet="SpecialOffer">
+          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+          <ScalarProperty Name="ItemMalName" ColumnName="ItemMalName" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpecialOfferItems">
+      <EntityTypeMapping TypeName="DailyFishModel.SpecialOfferItem">
+        <MappingFragment StoreEntitySet="SpecialOfferItems">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+          <ScalarProperty Name="SItemID" ColumnName="SItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DailyFishModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="LandMark" ColumnName="LandMark" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="DailyFishModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SpecialOfferId" ColumnName="SpecialOfferId" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

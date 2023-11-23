@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f9d65485be94f65bff519e12f069448" Name="Diagram1">
+        <EntityTypeShape EntityType="DailyFishModel.Category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyFishModel.Item" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyFishModel.ItemPrice" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyFishModel.UnitItem" Width="1.5" PointX="5.5" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="DailyFishModel.FK__Item__CategoryId__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="DailyFishModel.FK__ItemPrice__ItemI__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="DailyFishModel.FK__UnitItem__UnitID__286302EC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DailyFishModel.Order" Width="1.5" PointX="10.375" PointY="7.375" />
+        <EntityTypeShape EntityType="DailyFishModel.SpecialOffer" Width="1.5" PointX="10.375" PointY="3.625" />
+        <EntityTypeShape EntityType="DailyFishModel.SpecialOfferItem" Width="1.5" PointX="12.625" PointY="1.125" />
+        <AssociationConnector Association="DailyFishModel.FK__SpecialOf__ItemI__59FA5E80" />
+        <AssociationConnector Association="DailyFishModel.FK__SpecialOf__Offer__5812160E" />
+        <EntityTypeShape EntityType="DailyFishModel.OrderDetail" Width="1.5" PointX="12.625" PointY="5.75" />
+        <AssociationConnector Association="DailyFishModel.FK__OrderDeta__ItemI__6E01572D" />
+        <AssociationConnector Association="DailyFishModel.FK__OrderDeta__Order__6FE99F9F" />
+        <AssociationConnector Association="DailyFishModel.FK__OrderDeta__Speci__6EF57B66" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
